@@ -4,11 +4,11 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"math/rand"
-	"os"
-	"strconv"
-
+	"fmt"
+	"github.com/joho/godotenv"
 	"github.com/spf13/cobra"
+	"log"
+	"os"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -44,5 +44,23 @@ func init() {
 }
 
 func showQuote(cmd *cobra.Command, args []string) {
-	println("here's a random quote " + strconv.Itoa(rand.Int()))
+	loadEnv()
+	storage, err := NewStorage(os.Getenv("STORAGE_FILE_PATH") + os.Getenv("STORAGE_FILE_NAME"))
+	if err != nil {
+		panic(err)
+	}
+	quotes, err := storage.GetAllQuotes()
+	if err != nil {
+		panic(err)
+	}
+	println(quotes)
+}
+
+func loadEnv() {
+	fmt.Println("loading env...")
+	// Load .env file
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file") //probably should use sops
+	}
 }

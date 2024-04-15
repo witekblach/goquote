@@ -81,11 +81,6 @@ This app adds a quote and displays it.`,
 	},
 }
 
-type Quote struct {
-	text   string
-	viewed int
-}
-
 func init() {
 	rootCmd.AddCommand(addCmd)
 

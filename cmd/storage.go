@@ -14,7 +14,7 @@ func NewStorage(path string) (Storage, error) {
 	}
 
 	//seedDb(file)
-	
+
 	return Storage{path, file}, nil
 }
 
@@ -75,10 +75,27 @@ func (s *Storage) GetRandomQuote() (Quote, error) {
 	return randomElement, nil
 }
 
-func (s *Storage) AddQuote(quote string) (bool, error) {
+func (s *Storage) AddQuote(quote Quote) (bool, error) {
+	allQuotes, err := s.GetAllQuotes()
+	if err != nil {
+		panic(err)
+	}
+
+	quotes := append(allQuotes, quote)
+
+	s.writeQuotesToFile(quotes)
+
 	return true, nil
 }
 
-func (s *Storage) ExistsQuote(quote string) (bool, error) {
-	return true, nil
+func (s *Storage) writeQuotesToFile(quotes []Quote) {
+	b, err := json.Marshal(quotes)
+	if err != nil {
+		panic(err)
+	}
+
+	_, err = s.File.Write(b)
+	if err != nil {
+		panic(err)
+	}
 }

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"strings"
 )
 
 func NewStorage(path string) (Storage, error) {
@@ -62,6 +63,29 @@ func (s *Storage) GetAllQuotes() ([]Quote, error) {
 	}
 
 	return quotes, nil
+}
+
+func (s *Storage) GetQuoteMatching(sToMatch string) ([]Quote, error) {
+	var quotes []Quote
+	var result []Quote
+
+	fileContents, err := s.ReadAll()
+	if err != nil {
+		panic(err)
+	}
+
+	err = json.Unmarshal(fileContents, &quotes)
+	if err != nil {
+		panic(err)
+	}
+
+	for _, obj := range quotes {
+		if strings.Contains(obj.Text, sToMatch) {
+			result = append(result, obj)
+		}
+	}
+
+	return result, nil
 }
 
 func (s *Storage) GetRandomQuote() (Quote, error) {

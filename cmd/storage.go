@@ -7,29 +7,42 @@ import (
 	"os"
 )
 
-func NewStorage(path string) (*Storage, error) {
-	println(path)
-	file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0644)
+func NewStorage(path string) (Storage, error) {
+	file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
-		return nil, fmt.Errorf("failed to open file: %w", err)
+		panic(err)
 	}
+
+	//seedDb(file)
+	
+	return Storage{path, file}, nil
+}
+
+func seedDb(file *os.File) {
 
 	q1 := Quote{"AAA", 0}
 	q2 := Quote{"BBB", 0}
-	println(q1.String(), q2.String())
-	quotesToDb := Quotes{q1, q2}
+	q3 := Quote{"CCC", 0}
+	q4 := Quote{"DDD", 0}
+	q5 := Quote{"EEE", 0}
+	q6 := Quote{"FFF", 0}
+	quotesToDb := Quotes{q1, q2, q3, q4, q5, q6}
 
 	b, err := json.Marshal(quotesToDb)
+	if err != nil {
+		panic(err)
+	}
 
 	_, err = file.Write(b)
-
-	return &Storage{path, file}, nil
+	if err != nil {
+		panic(err)
+	}
 }
 
 func (s *Storage) ReadAll() ([]byte, error) {
-	data, err := os.ReadFile(s.path)
+	data, err := os.ReadFile(s.Path)
 	if err != nil {
-		return nil, fmt.Errorf("failed to read data from file: %w", err)
+		return nil, fmt.Errorf("failed to read data from File: %w", err)
 	}
 
 	return data, nil
@@ -37,10 +50,12 @@ func (s *Storage) ReadAll() ([]byte, error) {
 
 func (s *Storage) GetAllQuotes() ([]Quote, error) {
 	var quotes []Quote
+
 	fileContents, err := s.ReadAll()
 	if err != nil {
 		panic(err)
 	}
+
 	err = json.Unmarshal(fileContents, &quotes)
 	if err != nil {
 		panic(err)

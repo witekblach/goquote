@@ -4,7 +4,6 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
 	"github.com/joho/godotenv"
 	"github.com/spf13/cobra"
 	"log"
@@ -36,7 +35,7 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.goquote.yaml)")
+	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config File (default is $HOME/.goquote.yaml)")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
@@ -49,18 +48,18 @@ func showQuote(cmd *cobra.Command, args []string) {
 	if err != nil {
 		panic(err)
 	}
-	quotes, err := storage.GetAllQuotes()
+
+	quote, err := storage.GetRandomQuote()
 	if err != nil {
 		panic(err)
 	}
-	println(quotes)
+
+	println(quote.Text)
 }
 
 func loadEnv() {
-	fmt.Println("loading env...")
-	// Load .env file
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file") //probably should use sops
+		log.Fatal("Error loading .env File") //probably should use sops
 	}
 }

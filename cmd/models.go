@@ -6,17 +6,17 @@ import (
 )
 
 type Storage struct {
-	path string
-	file *os.File
+	Path string
+	File *os.File
 }
 
 type Quote struct {
-	text   string
-	viewed int
+	Text   string
+	Viewed int
 }
 
 func (q Quote) String() string {
-	return fmt.Sprintf("text: %s, viewed: %d", q.text, q.viewed)
+	return fmt.Sprintf("Text: %s, Viewed: %d", q.Text, q.Viewed)
 }
 
 type Quotes = []Quote

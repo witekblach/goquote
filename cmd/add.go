@@ -29,7 +29,7 @@ This app adds a quote and displays it.`,
 
 		err := godotenv.Load()
 		if err != nil {
-			log.Fatal("Error loading .env file") //probably should use sops
+			log.Fatal("Error loading .env File") //probably should use sops
 		}
 
 		dbName := "local.db"
@@ -68,7 +68,7 @@ This app adds a quote and displays it.`,
 		// Loop through rows, using Scan to assign column data to struct fields.
 		for rows.Next() {
 			var alb Quote
-			if err := rows.Scan(&alb.text, &alb.viewed); err != nil {
+			if err := rows.Scan(&alb.Text, &alb.Viewed); err != nil {
 				println(fmt.Println(albums, err))
 			}
 			albums = append(albums, alb)

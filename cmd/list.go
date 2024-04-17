@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"os"
-
 	"github.com/spf13/cobra"
 )
 
@@ -21,7 +19,7 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		storage, err := NewStorage(os.Getenv("STORAGE_FILE_PATH") + os.Getenv("STORAGE_FILE_NAME"))
+		storage, err := NewStorage()
 		if err != nil {
 			panic(err)
 		}
@@ -48,8 +46,6 @@ to quickly create a Cobra application.`,
 
 func init() {
 	rootCmd.AddCommand(listCmd)
-
-	loadEnv()
 
 	listCmd.Flags().StringVarP(&Search, SearchFlag, "s", "", "Search for a substring")
 }

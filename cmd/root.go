@@ -1,12 +1,7 @@
-/*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
-	"github.com/joho/godotenv"
 	"github.com/spf13/cobra"
-	"log"
 	"os"
 )
 
@@ -43,8 +38,7 @@ func init() {
 }
 
 func showQuote(cmd *cobra.Command, args []string) {
-	loadEnv()
-	storage, err := NewStorage(os.Getenv("STORAGE_FILE_PATH") + os.Getenv("STORAGE_FILE_NAME"))
+	storage, err := NewStorage()
 	if err != nil {
 		panic(err)
 	}
@@ -55,11 +49,4 @@ func showQuote(cmd *cobra.Command, args []string) {
 	}
 
 	println(quote.Text)
-}
-
-func loadEnv() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env File") //probably should use sops
-	}
 }

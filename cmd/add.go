@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"os"
 )
 
 // addCmd represents the add command
@@ -16,7 +15,7 @@ Add a quote but multiline;
 
 This app adds a quote and displays it.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		storage, err := NewStorage(os.Getenv("STORAGE_FILE_PATH") + os.Getenv("STORAGE_FILE_NAME"))
+		storage, err := NewStorage()
 		if err != nil {
 			panic(err)
 		}

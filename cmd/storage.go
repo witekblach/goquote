@@ -3,18 +3,19 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	"log/slog"
 	"math/rand"
 	"os"
 	"strings"
 )
 
-func NewStorage() (Storage, error) {
+func GetStorage() (Storage, error) {
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
 		panic(err)
 	}
 
-	path := homeDir + "/db.json"
+	path := homeDir + "/db.json" // straight up db.json in your home directory
 
 	file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
@@ -39,12 +40,15 @@ func (s *Storage) GetAllQuotes() ([]Quote, error) {
 		panic(err)
 	}
 
+	if len(quotes) == 0 {
+		slog.Error("Gotta add a quote first boy!")
+	}
+
 	return quotes, nil
 }
 
-func (s *Storage) GetQuoteMatching(sToMatch string) ([]Quote, error) {
+func (s *Storage) GetQuoteMatching(substringToMatch string) ([]Quote, error) {
 	var quotes []Quote
-	var result []Quote
 
 	fileContents, err := s.readAll()
 	if err != nil {
@@ -56,13 +60,15 @@ func (s *Storage) GetQuoteMatching(sToMatch string) ([]Quote, error) {
 		panic(err)
 	}
 
-	for _, obj := range quotes {
-		if strings.Contains(obj.Text, sToMatch) {
-			result = append(result, obj)
+	var quotesMatching []Quote
+
+	for _, quote := range quotes {
+		if strings.Contains(quote.Text, substringToMatch) {
+			quotesMatching = append(quotesMatching, quote)
 		}
 	}
 
-	return result, nil
+	return quotesMatching, nil
 }
 
 func (s *Storage) GetRandomQuote() (Quote, error) {
@@ -103,13 +109,9 @@ func (s *Storage) writeQuotesToFile(quotes []Quote) {
 
 func seedDb(file *os.File) {
 
-	q1 := Quote{"AAA", 0}
-	q2 := Quote{"BBB", 0}
-	q3 := Quote{"CCC", 0}
-	q4 := Quote{"DDD", 0}
-	q5 := Quote{"EEE", 0}
-	q6 := Quote{"FFF", 0}
-	quotesToDb := Quotes{q1, q2, q3, q4, q5, q6}
+	q1 := Quote{"Better Software Faster", 0}
+	q2 := Quote{"Sooner Safer Happier", 0}
+	quotesToDb := Quotes{q1, q2}
 
 	b, err := json.Marshal(quotesToDb)
 	if err != nil {

@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"os"
 )
 
@@ -11,12 +10,8 @@ type Storage struct {
 }
 
 type Quote struct {
-	Text   string
-	Viewed int
-}
-
-func (q Quote) String() string {
-	return fmt.Sprintf("Text: %s, Viewed: %d", q.Text, q.Viewed)
+	Text   string `json:"text"`
+	Viewed int    `json:"viewed"`
 }
 
 type Quotes = []Quote

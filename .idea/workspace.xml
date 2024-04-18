@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="107fe117-3fef-4a54-89c8-fd0ce305d347" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.db.json" beforeDir="false" afterPath="$PROJECT_DIR$/.db.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.dist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.db.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/add.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/add.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/list.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/list.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/models.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/models.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/root.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/root.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/storage.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/storage.go" afterDir="false" />
     </list>
@@ -39,6 +40,9 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../../../sdk/go1.21rc3/src/log/log.go" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0

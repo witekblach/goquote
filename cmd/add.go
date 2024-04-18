@@ -15,7 +15,7 @@ Add a quote but multiline;
 
 This app adds a quote and displays it.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		storage, err := NewStorage()
+		storage, err := GetStorage()
 		if err != nil {
 			panic(err)
 		}

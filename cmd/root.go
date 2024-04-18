@@ -38,7 +38,7 @@ func init() {
 }
 
 func showQuote(cmd *cobra.Command, args []string) {
-	storage, err := NewStorage()
+	storage, err := GetStorage()
 	if err != nil {
 		panic(err)
 	}
@@ -48,5 +48,5 @@ func showQuote(cmd *cobra.Command, args []string) {
 		panic(err)
 	}
 
-	println(quote.Text)
+	os.Stdout.WriteString(quote.Text)
 }

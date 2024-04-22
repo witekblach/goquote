@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
+	"os"
 )
 
 // addCmd represents the add command
@@ -22,7 +23,9 @@ This app adds a quote and displays it.`,
 
 		success, err := storage.AddQuote(Quote{args[0], 0})
 
-		println(success)
+		if success {
+			_, _ = os.Stdout.WriteString(args[0] + " Added!")
+		}
 	},
 }
 

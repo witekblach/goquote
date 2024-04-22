@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
+	"os"
 )
 
 var Search string
@@ -27,9 +28,9 @@ to quickly create a Cobra application.`,
 		substring, _ := cmd.Flags().GetString(SearchFlag)
 		var quotes []Quote
 		if substring == "" {
-			quotes, err = storage.GetAllQuotes()
-			if err != nil {
-				panic(err)
+			quotes = storage.GetAllQuotes()
+			if len(quotes) == 0 {
+				os.Stdout.WriteString("No quotes found")
 			}
 		} else {
 			quotes, err = storage.GetQuoteMatching(substring)
@@ -39,7 +40,7 @@ to quickly create a Cobra application.`,
 		}
 
 		for _, q := range quotes {
-			println(q.Text)
+			os.Stdout.WriteString(q.Text)
 		}
 	},
 }

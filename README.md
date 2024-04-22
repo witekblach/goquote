@@ -32,13 +32,17 @@ goquote list
 goquote list -s app
 ```
 
-
-* https://link-to-more-info
-* https://link-to-more-info
-* https://link-to-more-info
-
 ## My setup
 
 Personally I added Go proverbs and chapter names of positive patterns from the book Sooner Safer Happier. My list:
 
-
+* Don't communicate by sharing memory, share memory by communicating.
+* The bigger the interface, the weaker the abstraction.
+* A little copying is better than a little dependency.
+* Clear is better than clever. Reflection is never clear.
+* Documentation is for users.
+* Start with Why; Empower the How
+* Scale agility, not Agile, Vertically then sideways
+* Invite over Inflict
+* Communicate, communicate, communicate; Three times as much as you think
+* Measure for learning

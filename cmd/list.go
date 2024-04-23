@@ -9,31 +9,25 @@ var Search string
 
 const SearchFlag = "search"
 
-// listCmd represents the list command
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		storage, err := GetStorage()
 		if err != nil {
 			panic(err)
 		}
 
-		substring, _ := cmd.Flags().GetString(SearchFlag)
+		flag, _ := cmd.Flags().GetString(SearchFlag)
 		var quotes []Quote
-		if substring == "" {
+
+		if flag == "" {
 			quotes = storage.GetAllQuotes()
 			if len(quotes) == 0 {
 				os.Stdout.WriteString("No quotes found")
 			}
 		} else {
-			quotes, err = storage.GetQuoteMatching(substring)
+			quotes, err = storage.GetQuoteMatching(flag)
 			if err != nil {
 				panic(err)
 			}

@@ -2,10 +2,10 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
+	"log/slog"
 	"os"
 )
 
-// rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "goquote",
 	Short: "Brighten up your terminal with a cringe-esque quote!",
@@ -45,7 +45,8 @@ func showQuote(cmd *cobra.Command, args []string) {
 
 	quote, err := storage.GetRandomQuote()
 	if err != nil {
-		panic(err)
+		slog.Info("try adding a quote first :) ")
+		return
 	}
 
 	os.Stdout.WriteString(quote.Text)

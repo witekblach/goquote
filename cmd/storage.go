@@ -2,10 +2,7 @@ package cmd
 
 import (
 	"encoding/json"
-	"fmt"
-	"math/rand"
 	"os"
-	"strings"
 )
 
 func GetStorage() (Storage, error) {
@@ -24,59 +21,23 @@ func GetStorage() (Storage, error) {
 	return Storage{path, file}, nil
 }
 
-func (s *Storage) GetRandomQuote() (Quote, error) {
-	quotes := s.GetAllQuotes()
-
-	randomIndex := rand.Intn(len(quotes))
-	randomElement := quotes[randomIndex]
-
-	return randomElement, nil
-}
-
-func (s *Storage) GetAllQuotes() []Quote {
-	var quotes []Quote
-
-	s.readQuotesFromFile(&quotes)
-
-	return quotes
-}
-
-func (s *Storage) GetQuoteMatching(substringToMatch string) ([]Quote, error) {
-	var quotes []Quote
-
-	s.readQuotesFromFile(&quotes)
-
-	var quotesMatching []Quote
-
-	for _, quote := range quotes {
-		if strings.Contains(quote.Text, substringToMatch) {
-			quotesMatching = append(quotesMatching, quote)
-		}
-	}
-
-	return quotesMatching, nil
-}
-
-func (s *Storage) AddQuote(quote Quote) (bool, error) {
-	allQuotes := s.GetAllQuotes()
-
-	quotes := append(allQuotes, quote)
-
-	s.writeQuotesToFile(quotes)
-
-	return true, nil
-}
-
-func (s *Storage) readQuotesFromFile(quotes *[]Quote) {
-	fileContents, err := s.readAll()
+func (s *Storage) readQuotesFromFile() ([]Quote, error) {
+	fileContents, err := os.ReadFile(s.Path)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
+	if err != nil {
+		return nil, err
+	}
+
+	var quotes []Quote
 	err = json.Unmarshal(fileContents, &quotes)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
+
+	return quotes, nil
 }
 
 func (s *Storage) writeQuotesToFile(quotes []Quote) {
@@ -89,13 +50,4 @@ func (s *Storage) writeQuotesToFile(quotes []Quote) {
 	if err != nil {
 		panic(err)
 	}
-}
-
-func (s *Storage) readAll() ([]byte, error) {
-	data, err := os.ReadFile(s.Path)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read data from File: %w", err)
-	}
-
-	return data, nil
 }

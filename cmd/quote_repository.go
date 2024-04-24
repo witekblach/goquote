@@ -8,9 +8,9 @@ import (
 )
 
 func (s *Storage) GetRandomQuote() (*Quote, error) {
-	quotes := s.GetAllQuotes()
+	quotes, err := s.GetAllQuotes()
 	if len(quotes) == 0 {
-		return nil, errors.New("no quotes found")
+		return nil, err
 	}
 	randomIndex := rand.Intn(len(quotes))
 	randomElement := &quotes[randomIndex]
@@ -18,13 +18,13 @@ func (s *Storage) GetRandomQuote() (*Quote, error) {
 	return randomElement, nil
 }
 
-func (s *Storage) GetAllQuotes() []Quote {
+func (s *Storage) GetAllQuotes() ([]Quote, error) {
 	quotes, err := s.readQuotesFromFile()
 	if err != nil {
-		slog.Error("had problems reading file :<")
+		return []Quote{}, errors.New("reading file. Trouble creating file or file does not contain any quotes")
 	}
 
-	return quotes
+	return quotes, nil
 }
 
 func (s *Storage) GetQuoteMatching(substringToMatch string) ([]Quote, error) {
@@ -44,7 +44,7 @@ func (s *Storage) GetQuoteMatching(substringToMatch string) ([]Quote, error) {
 }
 
 func (s *Storage) AddQuote(quote string) bool {
-	allQuotes := s.GetAllQuotes()
+	allQuotes, _ := s.GetAllQuotes()
 
 	quotes := append(allQuotes, Quote{quote, 0})
 
@@ -54,7 +54,11 @@ func (s *Storage) AddQuote(quote string) bool {
 }
 
 func (s *Storage) RemoveQuote(quote Quote) bool {
-	allQuotes := s.GetAllQuotes()
+	allQuotes, err := s.GetAllQuotes()
+	if err != nil {
+		slog.Info("I KNOW WHATS WRONG WITH IT. IT AIN'T GOT NO GAS IN IT")
+		return false
+	}
 
 	quotes := append(allQuotes, quote)
 

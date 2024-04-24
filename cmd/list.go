@@ -22,7 +22,7 @@ var listCmd = &cobra.Command{
 		var quotes []Quote
 
 		if flag == "" {
-			quotes = storage.GetAllQuotes()
+			quotes, _ = storage.GetAllQuotes()
 			if len(quotes) == 0 {
 				os.Stdout.WriteString("No quotes found")
 			}

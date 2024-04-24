@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
+	"log/slog"
 	"os"
 	"strings"
 )
@@ -15,7 +16,10 @@ var removeCmd = &cobra.Command{
 			panic(err)
 		}
 
-		quotes := storage.GetAllQuotes()
+		quotes, err := storage.GetAllQuotes()
+		if err != nil {
+			slog.Info("I KNOW WHATS WRONG WITH IT. IT AIN'T GOT NO GAS IN IT hehe")
+		}
 
 		for _, q := range quotes {
 			if strings.Contains(q.Text, args[0]) {
@@ -31,13 +35,4 @@ var removeCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(removeCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// removeCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
 }

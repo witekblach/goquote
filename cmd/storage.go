@@ -27,10 +27,6 @@ func (s *Storage) readQuotesFromFile() ([]Quote, error) {
 		return nil, err
 	}
 
-	if err != nil {
-		return nil, err
-	}
-
 	var quotes []Quote
 	err = json.Unmarshal(fileContents, &quotes)
 	if err != nil {

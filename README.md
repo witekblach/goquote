@@ -36,13 +36,13 @@ goquote list -s app
 
 Personally I added Go proverbs and chapter names of positive patterns from the book Sooner Safer Happier. My list:
 
-* Don't communicate by sharing memory, share memory by communicating.
-* The bigger the interface, the weaker the abstraction.
-* A little copying is better than a little dependency.
-* Clear is better than clever. Reflection is never clear.
-* Documentation is for users.
-* Start with Why; Empower the How
-* Scale agility, not Agile, Vertically then sideways
-* Invite over Inflict
-* Communicate, communicate, communicate; Three times as much as you think
-* Measure for learning
+* go run main.go add "Don't communicate by sharing memory, share memory by communicating.";
+* go run main.go add "The bigger the interface, the weaker the abstraction.";
+* go run main.go add "A little copying is better than a little dependency.";
+* go run main.go add "Clear is better than clever. Reflection is never clear.";
+* go run main.go add "Documentation is for users.";
+* go run main.go add "Start with Why; Empower the How";
+* go run main.go add "Scale agility, not Agile, Vertically then sideways";
+* go run main.go add "Invite over Inflict";
+* go run main.go add "Communicate, communicate, communicate; Three times as much as you think";
+* go run main.go add "Measure for learning";

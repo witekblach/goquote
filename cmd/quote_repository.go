@@ -12,8 +12,12 @@ func (s *Storage) GetRandomQuote() (*Quote, error) {
 	if len(quotes) == 0 {
 		return nil, err
 	}
+
 	randomIndex := rand.Intn(len(quotes))
 	randomElement := &quotes[randomIndex]
+
+	randomElement.addView()
+	s.updateQuoteInFile(*randomElement)
 
 	return randomElement, nil
 }
@@ -60,9 +64,14 @@ func (s *Storage) RemoveQuote(quote Quote) bool {
 		return false
 	}
 
-	quotes := append(allQuotes, quote)
+	for i, q := range allQuotes {
+		if q.Text == quote.Text {
+			allQuotes = append(allQuotes[:i], allQuotes[i+1:]...)
+			continue
+		}
+	}
 
-	s.writeQuotesToFile(quotes)
+	s.writeQuotesToFile(allQuotes)
 
 	return true
 }

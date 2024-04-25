@@ -34,7 +34,7 @@ var listCmd = &cobra.Command{
 		}
 
 		for _, q := range quotes {
-			os.Stdout.WriteString(q.Text)
+			os.Stdout.WriteString(q.Text + "\n")
 		}
 	},
 }

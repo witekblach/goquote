@@ -14,4 +14,8 @@ type Quote struct {
 	Viewed int    `json:"viewed"`
 }
 
+func (q *Quote) addView() {
+	q.Viewed++
+}
+
 type Quotes = []Quote

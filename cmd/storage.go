@@ -13,10 +13,13 @@ func GetStorage() (Storage, error) {
 
 	path := homeDir + "/db.json" // straight up db.json in your home directory
 
-	file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0644)
+	file, err := os.OpenFile(path, os.O_RDONLY, 0644)
 	if err != nil {
-		panic(err)
+		//panic(err)
 	}
+	defer file.Close()
+
+	_, _ := os.OpenFile(path, os.O_CREATE, 0644)
 
 	return Storage{path, file}, nil
 }
@@ -46,4 +49,19 @@ func (s *Storage) writeQuotesToFile(quotes []Quote) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func (s *Storage) updateQuoteInFile(quote Quote) {
+	quotes, err := s.readQuotesFromFile()
+	if err != nil {
+		return
+	}
+
+	for i, q := range quotes {
+		if q.Text == quote.Text {
+			quotes[i].Viewed = quote.Viewed
+		}
+	}
+
+	s.writeQuotesToFile(quotes)
 }

@@ -3,6 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"os"
+	"strconv"
 )
 
 var Search string
@@ -33,8 +34,8 @@ var listCmd = &cobra.Command{
 			}
 		}
 
-		for _, q := range quotes {
-			os.Stdout.WriteString(q.Text + "\n")
+		for i, q := range quotes {
+			os.Stdout.WriteString(strconv.Itoa(i+1) + ") " + q.Text + "\n")
 		}
 	},
 }

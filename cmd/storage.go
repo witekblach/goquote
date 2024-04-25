@@ -13,13 +13,10 @@ func GetStorage() (Storage, error) {
 
 	path := homeDir + "/db.json" // straight up db.json in your home directory
 
-	file, err := os.OpenFile(path, os.O_RDONLY, 0644)
+	file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
-		//panic(err)
+		panic(err)
 	}
-	defer file.Close()
-
-	_, _ := os.OpenFile(path, os.O_CREATE, 0644)
 
 	return Storage{path, file}, nil
 }

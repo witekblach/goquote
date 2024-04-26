@@ -18,7 +18,7 @@ var removeCmd = &cobra.Command{
 
 		quotes, err := storage.GetAllQuotes()
 		if err != nil {
-			slog.Info("I KNOW WHATS WRONG WITH IT. IT AIN'T GOT NO GAS IN IT hehe")
+			slog.Info("I KNOW WHATS WRONG WITH IT. IT AIN'T GOT NO GAS IN IT")
 		}
 
 		for _, q := range quotes {

@@ -1,9 +1,9 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"os"
-	"strconv"
 )
 
 var Search string
@@ -35,7 +35,7 @@ var listCmd = &cobra.Command{
 		}
 
 		for i, q := range quotes {
-			os.Stdout.WriteString(strconv.Itoa(i+1) + ") " + q.Text + "\n")
+			os.Stdout.WriteString(fmt.Sprintf("%d) Viewed: %d times. Quote: %s\n", i+1, q.Viewed, q.Text))
 		}
 	},
 }

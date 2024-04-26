@@ -58,7 +58,6 @@ goquote add "Measure for learning";
 
 ## Enjoy!
 
-
 ```
 cowsay -l
 apt bud-frogs bunny calvin cheese cock cower daemon default dragon dragon-and-cow duck elephant elephant-in-snake eyes 
@@ -85,3 +84,12 @@ Weather report: Warsaw
                 0.1 mm
 
 ```
+
+### todo land
+
+This isn't finished, I'm just finished with it (for now). I was thinking this when i left it:
+
+1) storage has to return errors, this should give option to configure goquote on first run (no storage)
+2) 2-3 e2e tests would save me time from manual testing
+3) views don't do anything, maybe we can make the domain bigger and introduce priority for lower view numbers, maybe
+   better way to record views

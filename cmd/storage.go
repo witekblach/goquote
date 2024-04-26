@@ -36,6 +36,7 @@ func (s *Storage) readQuotesFromFile() ([]Quote, error) {
 	return quotes, nil
 }
 
+// love that storage can't fail <3 /s
 func (s *Storage) writeQuotesToFile(quotes []Quote) {
 	b, err := json.Marshal(quotes)
 	if err != nil {

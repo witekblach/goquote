@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="107fe117-3fef-4a54-89c8-fd0ce305d347" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/cat_db.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/cat_db.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/goquote" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/list.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/list.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/remove.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/remove.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/storage.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/storage.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
